@@ -1,19 +1,13 @@
-name: 'Cache install Nix packages'
-description: 'Use the GitHub Actions cache for Nix packages'
+name: 'Cache builds of Nix flake attributes'
+description: 'Use the GitHub Actions cache for Nix flake attribute builds'
 author: 'Rik Huijzer'
 inputs:
   key:
     description: 'An explicit key for restoring and saving the cache'
     required: true
-  restore-keys:
-    description: 'An ordered list of keys to use for restoring the cache if no cache hit occurred for key'
-    required: false
-  nix_version:
-    description: 'Nix version, defaults to `nixos-unstable`.'
-    default: 'nixos-unstable'
-  nix_file:
-    description: 'Nix file, defaults to `default.nix`.'
-    default: 'default.nix'
+  flake_paths:
+    description: 'Flake paths to cache builds of, defaults to `.#devShells.x86_64-linux.default`.'
+    default: '.#devShells.x86_64-linux.default'
 outputs:
   cache-hit:
     description: 'A boolean value to indicate an exact match was found for the primary key'

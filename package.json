@@ -1,5 +1,5 @@
 {
-  "name": "Cache install Nix packages",
+  "name": "cache-flake-attr",
   "version": "1.0.8",
   "description": "Use the GitHub Actions cache for Nix packages",
   "main": "src/main.js",

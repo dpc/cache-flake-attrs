@@ -48,30 +48,15 @@ function install_nix {
   fi
 }
 
-function install_via_nix {
-  if [[ -f "$INPUT_NIX_FILE" ]]; then
-    # Path is set correctly by set_paths but that is only available outside of this Action.
-    PATH=/nix/var/nix/profiles/default/bin/:$PATH
-    nix-env --install --file "$INPUT_NIX_FILE"
-  else 
-    echo "File at nix_file does not exist"
-    exit 1
-  fi
+function build_via_nix {
+  # Path is set correctly by set_paths but that is only available outside of this Action.
+  PATH=/nix/var/nix/profiles/default/bin/:$PATH
+  nix build --extra-experimental-features nix-command --extra-experimental-features flakes $INPUT_FLAKE_PATHS
 }
 
 function set_paths {
   echo "/nix/var/nix/profiles/per-user/$USER/profile/bin" >> $GITHUB_PATH
   echo "/nix/var/nix/profiles/default/bin" >> $GITHUB_PATH
-}
-
-function set_nix_path {
-  INPUT_NIX_PATH="nixpkgs=channel:$INPUT_NIX_VERSION"
-  if [[ "$INPUT_NIX_PATH" != "" ]]; then
-    installer_options+=(--no-channel-add)
-  else
-    INPUT_NIX_PATH="/nix/var/nix/profiles/per-user/root/channels"
-  fi
-  echo "NIX_PATH=${INPUT_NIX_PATH}" >> $GITHUB_ENV
 }
 
 function prepare {
@@ -86,14 +71,12 @@ function undo_prepare {
 TASK="$1"
 if [ "$TASK" == "prepare-restore" ]; then
   prepare
-elif [ "$TASK" == "install-with-nix" ]; then
+elif [ "$TASK" == "build-with-nix" ]; then
   undo_prepare
-  set_nix_path
   install_nix
   set_paths
-  install_via_nix
+  build_via_nix
 elif [ "$TASK" == "install-from-cache" ]; then
-  set_nix_path
   set_paths
 elif [ "$TASK" == "prepare-save" ]; then
   prepare
