@@ -1,6 +1,6 @@
 name: 'Cache builds of Nix flake attributes'
 description: 'Use the GitHub Actions cache for Nix flake attribute builds'
-author: 'Rik Huijzer'
+author: 'Matthew Toohey'
 inputs:
   key:
     description: 'An explicit key for restoring and saving the cache'

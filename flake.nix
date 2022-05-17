@@ -1,5 +1,5 @@
 {
-  description = "Cache flake attr";
+  description = "Cache flake attrs";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixpkgs-unstable";

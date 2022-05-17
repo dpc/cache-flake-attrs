@@ -1,6 +1,6 @@
 {
-  "name": "cache-flake-attr",
-  "version": "1.0.8",
+  "name": "cache-flake-attrs",
+  "version": "2.0.0",
   "description": "Use the GitHub Actions cache for Nix packages",
   "main": "src/main.js",
   "scripts": {
@@ -8,15 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nix-actions/cache-install.git"
+    "url": "git+https://github.com/mtoohey31/cache-flake-attrs.git"
   },
   "keywords": [
     "actions",
     "nix",
-    "install",
-    "cache"
+    "flake"
   ],
-  "author": "Rik Huijzer",
+  "author": "Matthew Toohey",
   "license": "MIT",
   "dependencies": {
     "@actions/cache": "^1.0.2",
