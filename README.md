@@ -5,7 +5,7 @@ This actions allows caching of builds of [Nix](https://nixos.org) flake attribut
 ## Inputs
 
 - `key` - An explicit key for restoring and saving the cache
-- `flake_paths` - Flake paths to attributes to cache builds of
+- `flake_paths` - Flake paths to attributes to cache builds of (space separated, passed internally to `nix buid ...`, defaults to `.#devShells.x86_64-linux.default`)
 
 ## Example workflow
 
